@@ -124,3 +124,30 @@ If you find our repo useful for your research, please consider citing our paper:
     year = {2024}
 }
 ```
+
+## Related Links
+
+Our related projects: [VBench](https://github.com/Vchitect/VBench)
+
+```bibtex
+@InProceedings{huang2023vbench,
+    title={{VBench}: Comprehensive Benchmark Suite for Video Generative Models},
+    author={Huang, Ziqi and He, Yinan and Yu, Jiashuo and Zhang, Fan and Si, Chenyang and Jiang, Yuming and Zhang, Yuanhan and Wu, Tianxing and Jin, Qingyang and Chanpaisit, Nattapol and Wang, Yaohui and Chen, Xinyuan and Wang, Limin and Lin, Dahua and Qiao, Yu and Liu, Ziwei},
+    booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+    year={2024}
+}
+
+@article{huang2024vbench++,
+    title={{VBench++}: Comprehensive and Versatile Benchmark Suite for Video Generative Models},
+    author={Huang, Ziqi and Zhang, Fan and Xu, Xiaojie and He, Yinan and Yu, Jiashuo and Dong, Ziyue and Ma, Qianli and Chanpaisit, Nattapol and Si, Chenyang and Jiang, Yuming and Wang, Yaohui and Chen, Xinyuan and Chen, Ying-Cong and Wang, Limin and Lin, Dahua and Qiao, Yu and Liu, Ziwei},
+    journal={arXiv preprint arXiv:2411.13503},
+    year={2024}
+}
+
+@article{zheng2025vbench2,
+    title={{VBench-2.0}: Advancing Video Generation Benchmark Suite for Intrinsic Faithfulness},
+    author={Zheng, Dian and Huang, Ziqi and Liu, Hongbo and Zou, Kai and He, Yinan and Zhang, Fan and Zhang, Yuanhan and He, Jingwen and Zheng, Wei-Shi and Qiao, Yu and Liu, Ziwei},
+    journal={arXiv preprint arXiv:2503.21755},
+    year={2025}
+}
+```
