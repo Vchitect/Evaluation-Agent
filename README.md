@@ -7,6 +7,7 @@
 This repository contains the implementation of the following work:
 > **Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models**<br>
 > [Fan Zhang](https://github.com/zhangfan-p)<sup>∗</sup>, [Shulin Tian](https://shulin16.github.io/)<sup>∗</sup>, [Ziqi Huang](https://ziqihuangg.github.io/)<sup>∗</sup>, [Yu Qiao](http://mmlab.siat.ac.cn/yuqiao/index.html)<sup>+</sup>, [Ziwei Liu](https://liuziwei7.github.io/)<sup>+</sup><br>
+> The 63rd Annual Meeting of the Association for Computational Linguistics (**ACL 2025**), Oral
 
 
 
