@@ -2,13 +2,28 @@
 [![Project Page](https://img.shields.io/badge/Evaluation-Website-green?logo=googlechrome&logoColor=green)](https://vchitect.github.io/Evaluation-Agent-project/)
 ![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FVchitect%2FEvaluation-Agent&label=Visitors&icon=people&color=%233d8bfd)
 
+<div align="center">
+<h1>Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models
+</h1></div>
 
+<div align="center">
+    <a href="https://github.com/zhangfan-p" target="_blank">Fan Zhang</a>*,
+    <a href="https://shulin16.github.io/" target="_blank">Shulin Tian</a>*,
+    <a href="https://ziqihuangg.github.io/" target="_blank">Ziqi Huang</a>‡*,
+    <a href="http://mmlab.siat.ac.cn/yuqiao/index.html" target="_blank">Yu Qiao</a><sup>+</sup>,
+    <a href="https://liuziwei7.github.io/" target="_blank">Ziwei Liu</a><sup>+</sup>
+</div>
 
-This repository contains the implementation of the following work:
-> **Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models**<br>
-> [Fan Zhang](https://github.com/zhangfan-p)<sup>∗</sup>, [Shulin Tian](https://shulin16.github.io/)<sup>∗</sup>, [Ziqi Huang](https://ziqihuangg.github.io/)<sup>∗</sup>, [Yu Qiao](http://mmlab.siat.ac.cn/yuqiao/index.html)<sup>+</sup>, [Ziwei Liu](https://liuziwei7.github.io/)<sup>+</sup><br>
-> The 63rd Annual Meeting of the Association for Computational Linguistics (**ACL 2025**), Oral
+<div align="center">
+     * equal contributions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+     ‡ project lead &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+     + corresponding authors
+</div>
 
+<div align="center">
+    ACL 2025, Main Conference<br>
+    <font color="red">Oral, SAC Highlights Award (47 out of 8350)</font>
+</div>
 
 
 
@@ -119,10 +134,10 @@ The three graphs give an overview of the distributions and types of our curated 
 If you find our repo useful for your research, please consider citing our paper:
 
 ```bibtex
-@article{zhang2024evaluationagent,
+@InProceedings{zhang2024evaluationagent,
     title = {Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models},
     author = {Zhang, Fan and Tian, Shulin and Huang, Ziqi and Qiao, Yu and Liu, Ziwei},
-    journal={arXiv preprint arXiv:2412.09645},
+    booktitle={Annual Meeting of the Association for Computational Linguistics (ACL), 2025},
     year = {2024}
 }
 ```
