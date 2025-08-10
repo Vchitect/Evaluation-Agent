@@ -144,7 +144,7 @@ If you find our repo useful for your research, please consider citing our paper:
 
 ## Related Links
 
-Our related projects: [VBench](https://github.com/Vchitect/VBench)
+Our related projects: [VBench](https://github.com/Vchitect/VBench), [Awesome Evaluation of Visual Generation](https://github.com/ziqihuangg/Awesome-Evaluation-of-Visual-Generation)
 
 ```bibtex
 @InProceedings{huang2023vbench,
