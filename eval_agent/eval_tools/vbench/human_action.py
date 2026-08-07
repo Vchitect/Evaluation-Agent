@@ -71,9 +71,14 @@ def human_action(umt_path, video_pairs, device):
         query = info['prompt']
         video_path = info['content_path']
         
-        # video_label_ls = video_path.split('/')[-1].lower().split('-')[0].split("person is ")[-1].split('_')[0]
-        video_label_ls = video_path.split('/')[-1].lower().split('.mp4')[0].replace("_", " ").split("person is ")[-1].split('_')[0]
-        print("video_lable_ls is: ", video_label_ls)
+        # The prompt is the ground-truth Kinetics action. Deriving it from the
+        # generated filename breaks as soon as filenames are shortened or gain
+        # collision-resistant hashes.
+        video_label_ls = " ".join(query.casefold().split())
+        for prefix in ("a person is ", "person is "):
+            if video_label_ls.startswith(prefix):
+                video_label_ls = video_label_ls[len(prefix):]
+                break
         cnt += 1
         images = load_video(video_path, data_transform, num_frames=16)
         images = images.unsqueeze(0)
