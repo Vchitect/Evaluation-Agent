@@ -1,0 +1,47 @@
+### model
+model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+trust_remote_code: true
+
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+deepspeed: training/deepspeed/zero3.json
+
+### dataset
+dataset: ea_cot_10k_table
+dataset_dir: training/data
+template: qwen
+cutoff_len: 4096
+max_samples: 1000000
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+train_on_prompt: false
+mask_history: true
+packing: false
+
+### output
+output_dir: training/outputs/ea3b_full_sft
+logging_steps: 10
+save_steps: 200
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+report_to: none
+
+### train
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 1.0e-5
+weight_decay: 0.0
+max_grad_norm: 1.0
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+optim: adamw_torch
+bf16: true
+seed: 42
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+gradient_checkpointing: true

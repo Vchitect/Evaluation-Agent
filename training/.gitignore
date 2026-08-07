@@ -1,0 +1,3 @@
+/outputs/
+/data/*
+!/data/dataset_info.json

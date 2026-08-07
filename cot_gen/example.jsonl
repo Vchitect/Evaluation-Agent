@@ -1,0 +1,15 @@
+
+{
+    "round_id": 0,
+    "plan_agent_input": "...", 
+    "plan_agent_output": [{
+      "thought": "...",
+      "aspect": "Subject‑consistency"
+    }],
+    "promptgen_input": "...",
+    "promptgen_output": {
+      "thought": "...",
+      "prompt": "Generate a 3‑sec video of ..."
+    },
+    "eval_results": {...}
+  }

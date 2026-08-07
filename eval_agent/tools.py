@@ -1,11 +1,12 @@
 import sys
 import os
 import json
+import hashlib
+import re
 
 from tqdm import tqdm
 
 sys.path.insert(0, "eval_tools")
-from eval_tools.vlm.gpt import GPT
 
 
 
@@ -24,6 +25,15 @@ class GenModel:
         elif model_name == "latte1":
             from eval_models.latte.latte_1_predict import Latte1
             self.predictor = Latte1()
+        elif model_name == "cogvideox-2b":
+            from eval_models.cogvideox.cogvideox_predict import CogVideoX2B
+            self.predictor = CogVideoX2B()
+        elif model_name == "cogvideox-5b":
+            from eval_models.cogvideox.cogvideox_predict import CogVideoX5B
+            self.predictor = CogVideoX5B()
+        elif model_name == "show1":
+            from eval_models.show1.show1_predict import Show1
+            self.predictor = Show1()
             
         elif model_name == "SDXL-1":
             from eval_models.SD.sd_predict import SDXL
@@ -43,7 +53,10 @@ class GenModel:
     
     def predict(self, prompt, save_path):
         os.makedirs(save_path, exist_ok=True)
-        name = prompt.strip().replace(" ", "_")
+        digest = hashlib.sha256(prompt.encode("utf-8")).hexdigest()[:10]
+        clean_prompt = re.sub(r"[^A-Za-z0-9._-]+", "_", prompt.strip())
+        clean_prompt = clean_prompt.strip("._-")[:160] or "sample"
+        name = f"{clean_prompt}_{digest}"
         if self.save_mode == "video":
             save_name = os.path.join(save_path, f"{name}.mp4")
         elif self.save_mode == "img":
@@ -182,7 +195,7 @@ class ToolCalling:
     def __init__(self, sample_model, save_mode):
         self.gen = GenModel(sample_model, save_mode)
         self.eval_tools = ToolBox()
-        self.vlm_gpt = GPT()
+        self.vlm_gpt = None
 
 
     def sample(self, prompts, save_path):
@@ -202,6 +215,10 @@ class ToolCalling:
     
     
     def vlm_eval(self, content_path, question):
+        if self.vlm_gpt is None:
+            from eval_tools.vlm.gpt import GPT
+
+            self.vlm_gpt = GPT()
         response = self.vlm_gpt.predict(content_path, question)
         return response
 

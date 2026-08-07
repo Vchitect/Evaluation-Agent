@@ -1,0 +1,13 @@
+{
+  "ea_cot_10k_table": {
+    "file_name": "evaluation_agent_cot_dataset_table.json",
+    "formatting": "alpaca",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system",
+      "history": "history"
+    }
+  }
+}
