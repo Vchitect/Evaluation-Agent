@@ -38,6 +38,15 @@ Recent advancements in visual generative models have enabled high-quality image 
 
 **Overview of Evaluation Agent Framework.** This framework leverages LLM-powered agents for efficient and flexible visual model assessments. As shown, it consists of two stages: (a) the Proposal Stage, where user queries are decomposed into sub-aspects, and prompts are generated, and (b) the Execution Stage, where visual content is generated and evaluated using an Evaluation Toolkit. The two stages interact iteratively to dynamically assess models based on user queries.
 
+### Implementations at a Glance
+
+This repository provides two execution paths for the Evaluation Agent workflow. They share the same multi-round evaluation design, but use different planning backends and currently cover different evaluation settings.
+
+| Implementation | Planning backend | Current scope | Main code paths |
+| --- | --- | --- | --- |
+| **Evaluation Agent (ACL 2025)** | GPT-4o through the OpenAI API | Open-ended T2I, VBench-based T2V, and T2I-CompBench-based T2I evaluation | [`open_ended_eval.py`](./eval_agent/open_ended_eval.py), [`eval_agent_for_vbench.py`](./eval_agent/eval_agent_for_vbench.py), and [`eval_agent_for_t2i_compbench.py`](./eval_agent/eval_agent_for_t2i_compbench.py) |
+| **Open-EA** | Locally served EA-3B planner with Qwen2.5-3B-Instruct for prompt selection | VBench-based T2V evaluation | [runtime](./eval_agent/eval_agent_for_vbench_open.py), [training recipe](./training/), and [EA-CoT data construction](./data_construction/) |
+
 ## Open-EA
 
 **Open Evaluation Agent (Open-EA)** turns completed, multi-round evaluation rollouts into history-conditioned supervision and transfers the evaluation protocol to a compact local planner. Open-EA introduces the EA-CoT training corpus and **EA-3B**, initialized from Qwen2.5-3B-Instruct.
