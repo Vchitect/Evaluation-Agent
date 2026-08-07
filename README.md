@@ -1,12 +1,12 @@
 [![Paper](https://img.shields.io/badge/cs.CV-Paper-b31b1b?logo=arxiv&logoColor=red)](https://arxiv.org/abs/2412.09645)
 [![Project Page](https://img.shields.io/badge/Evaluation-Website-green?logo=googlechrome&logoColor=green)](https://vchitect.github.io/Evaluation-Agent-project/)
+[![Hugging Face Data & Model](https://img.shields.io/badge/%F0%9F%A4%97%20Data%20%26%20Model-Open--EA-FFD21E)](https://huggingface.co/open-ea)
 [![Visitor](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FVchitect%2FEvaluation-Agent&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 
 This repository contains the implementation of the following work:
 > **Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models**<br>
 > [Fan Zhang](https://github.com/zhangfan-p)<sup>∗</sup>, [Shulin Tian](https://shulin16.github.io/)<sup>∗</sup>, [Ziqi Huang](https://ziqihuangg.github.io/)<sup>∗</sup>, [Yu Qiao](http://mmlab.siat.ac.cn/yuqiao/index.html)<sup>+</sup>, [Ziwei Liu](https://liuziwei7.github.io/)<sup>+</sup><br>
-
 
 
 
@@ -20,14 +20,28 @@ Recent advancements in visual generative models have enabled high-quality image 
 
 **Overview of Evaluation Agent Framework.** This framework leverages LLM-powered agents for efficient and flexible visual model assessments. As shown, it consists of two stages: (a) the Proposal Stage, where user queries are decomposed into sub-aspects, and prompts are generated, and (b) the Execution Stage, where visual content is generated and evaluated using an Evaluation Toolkit. The two stages interact iteratively to dynamically assess models based on user queries.
 
+## Open-EA
+
+**Open Evaluation Agent (Open-EA)** turns completed, multi-round evaluation rollouts into history-conditioned supervision and transfers the evaluation protocol to a compact local planner. Open-EA introduces the EA-CoT training corpus and **EA-3B**, initialized from Qwen2.5-3B-Instruct.
+
+The canonical **EA-CoT-10K** T2V core contains **10,042 table-context records**: 7,494 tool-decision records and 2,548 summary records spanning all 15 VBench tools. The separately published **EA-CoT-T2I** companion contains **986 records** (739 tool-decision and 247 summary records) across four T2I-CompBench tools and is **not used in the current EA-3B training run**.
+
+EA-3B is obtained by full-parameter supervised fine-tuning of Qwen2.5-3B-Instruct on the 10,042-record T2V core. See [training](./training/) for the cleaned history-conditioned training recipe. All official Open-EA model and dataset artifacts are published under the [`open-ea`](https://huggingface.co/open-ea) Hugging Face organization.
+
 <a name="installation"></a>
 ## :hammer: Installation
 
-1. Clone the repository.
+1. Clone the repository and initialize its pinned third-party submodules.
 
 ```bash
-git clone https://github.com/Vchitect/Evaluation-Agent.git
+git clone --recurse-submodules https://github.com/Vchitect/Evaluation-Agent.git
 cd Evaluation-Agent
+```
+
+For an existing checkout that was cloned without submodules, run:
+
+```bash
+git submodule update --init --recursive
 ```
 
 2. Install the environment.
@@ -42,7 +56,33 @@ pip install -r requirements.txt
 <a name="usage"></a>
 ## Usage
 
-First, you need to configure the `open_api_key`. You can do it as follows:
+### Local Open-EA Evaluation on T2V Models
+
+The Open-EA runtime uses two OpenAI-compatible local endpoints: EA-3B plans the evaluation, while Qwen2.5-3B-Instruct selects prompts from the relevant VBench list. Install [vLLM](https://docs.vllm.ai/en/latest/getting_started/installation.html) in a model-serving environment and start both services from the repository root, normally on separate GPUs and in separate terminals:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 bash scripts/serve_open_ea.sh planner
+```
+
+```bash
+CUDA_VISIBLE_DEVICES=1 bash scripts/serve_open_ea.sh prompt
+```
+
+The launchers bind to `127.0.0.1` by default because the endpoints have no authentication. Set `OPEN_EA_HOST` explicitly only when remote access is intended and protected by appropriate network controls.
+
+After preparing the target video model and the required VBench dependencies, use an additional GPU (or otherwise allocate devices according to the generator's requirements) and run:
+
+```bash
+cd eval_agent
+CUDA_VISIBLE_DEVICES=2 python eval_agent_for_vbench_open.py \
+    --user_query "How well does the model preserve subject consistency?" \
+    --model latte1
+```
+
+### API-backed Evaluation Agent
+
+The original API-backed pipeline requires an OpenAI API key:
+
 ```
 export OPENAI_API_KEY="your_api_key_here"
 ```
@@ -67,9 +107,9 @@ python open_ended_eval.py --user_query $USER_QUERY --model $MODEL
 
 2. Prepare the Model to be Evaluated
 
-- Download the weights of the target model for evaluation and place them in `./eval_agent/eval_models/{model_name}/checkpoints/`. 
+- For base adapters that expect local weights, download the target model and place it under `./eval_agent/eval_models/{model_name}/checkpoints/`. Adapters documented below may use a different layout or download checkpoints from Hugging Face on first use.
 
-- Currently, we support four models: [latte](https://github.com/Vchitect/Latte/tree/main), [modelscope](https://modelscope.cn/models/iic/text-to-video-synthesis/summary), [videocrafter-0.9](https://github.com/AILab-CVC/VideoCrafter/tree/30048d49873cbcd21077a001e6a3232e0909d254), and [videocrafter-2](https://github.com/AILab-CVC/VideoCrafter). These models may also have specific environment requirements. For details, please refer to the respective model links.
+- The base release supports [Latte](https://github.com/Vchitect/Latte/tree/main), [ModelScope](https://modelscope.cn/models/iic/text-to-video-synthesis/summary), [VideoCrafter-0.9](https://github.com/AILab-CVC/VideoCrafter/tree/30048d49873cbcd21077a001e6a3232e0909d254), and [VideoCrafter-2](https://github.com/AILab-CVC/VideoCrafter). Open-EA also registers [CogVideoX-2B/5B](./eval_agent/eval_models/cogvideox/) and [Show-1](./eval_agent/eval_models/show1/) adapters. Follow the adapter-specific setup instructions because their dependencies, checkpoint layouts, and licenses differ.
 
 #### Command
 
@@ -103,10 +143,12 @@ python eval_agent_for_t2i_compbench.py --user_query $USER_QUERY --model $MODEL
 
 
 
-## Open-Ended User Query Dataset
+## Open-Ended User Query Dataset (100 Queries)
 We propose the **Open-Ended User Query Dataset**, developed through a user study. As part of this process, we gathered questions from various sources, focusing on aspects users consider most important when evaluating new models. After cleaning, filtering, and expanding the initial set, we compiled a refined dataset of 100 open-ended user queries.
 
-Check out the details of the [open-ended user query dataset](https://github.com/Vchitect/Evaluation-Agent/tree/main/dataset) 
+Check out the details of the [open-ended user query dataset](./dataset/README.md).
+
+This 100-query resource is distinct from the EA-CoT training corpus introduced by Open-EA. The [dataset documentation](./dataset/README.md) describes both resources and their release status.
 
 ![statistic](./assets/open_dataset_stats.png)
 The three graphs give an overview of the distributions and types of our curated open queries set. Left: the distribution of question types, which are categorized as `General` or `Specific`. Middle: the distribution of the ability types, which are categorized as `Prompt Following`, `Visual Quality`, `Creativity`, `Knowledge` and `Others`. Right: the distribution of the content categories, which are categorized as `History and Culture`, `Film and Entertainment`, `Science and Education`, `Fashion`, `Medical`, `Game Design`, `Architecture and Interior Design`, `Law`.
