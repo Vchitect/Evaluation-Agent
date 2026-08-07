@@ -1,0 +1,4 @@
+imageio>=2.33.0
+imageio-ffmpeg>=0.4.9
+huggingface-hub>=0.13.2,<0.26
+Pillow>=9.0.0
