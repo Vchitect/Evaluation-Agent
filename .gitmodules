@@ -1,0 +1,6 @@
+[submodule "LLaMA-Factory"]
+	path = LLaMA-Factory
+	url = https://github.com/hiyouga/LLaMA-Factory.git
+[submodule "eval_agent/eval_models/show1/Show-1"]
+	path = eval_agent/eval_models/show1/Show-1
+	url = https://github.com/showlab/Show-1.git
