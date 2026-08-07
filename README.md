@@ -1,12 +1,30 @@
 [![Paper](https://img.shields.io/badge/cs.CV-Paper-b31b1b?logo=arxiv&logoColor=red)](https://arxiv.org/abs/2412.09645)
 [![Project Page](https://img.shields.io/badge/Evaluation-Website-green?logo=googlechrome&logoColor=green)](https://vchitect.github.io/Evaluation-Agent-project/)
 [![Hugging Face Data & Model](https://img.shields.io/badge/%F0%9F%A4%97%20Data%20%26%20Model-Open--EA-FFD21E)](https://huggingface.co/open-ea)
-[![Visitor](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FVchitect%2FEvaluation-Agent&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FVchitect%2FEvaluation-Agent&label=Visitors&icon=people&color=%233d8bfd)
 
+<div align="center">
+<h1>Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models
+</h1></div>
 
-This repository contains the implementation of the following work:
-> **Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models**<br>
-> [Fan Zhang](https://github.com/zhangfan-p)<sup>∗</sup>, [Shulin Tian](https://shulin16.github.io/)<sup>∗</sup>, [Ziqi Huang](https://ziqihuangg.github.io/)<sup>∗</sup>, [Yu Qiao](http://mmlab.siat.ac.cn/yuqiao/index.html)<sup>+</sup>, [Ziwei Liu](https://liuziwei7.github.io/)<sup>+</sup><br>
+<div align="center">
+    <a href="https://github.com/zhangfan-p" target="_blank">Fan Zhang</a>*,
+    <a href="https://shulin16.github.io/" target="_blank">Shulin Tian</a>*,
+    <a href="https://ziqihuangg.github.io/" target="_blank">Ziqi Huang</a>‡*,
+    <a href="http://mmlab.siat.ac.cn/yuqiao/index.html" target="_blank">Yu Qiao</a><sup>+</sup>,
+    <a href="https://liuziwei7.github.io/" target="_blank">Ziwei Liu</a><sup>+</sup>
+</div>
+
+<div align="center">
+     * equal contributions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+     ‡ project lead &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+     + corresponding authors
+</div>
+
+<div align="center">
+    ACL 2025, Main Conference<br>
+    <font color="red">Oral, SAC Highlights Award (47 out of 8350)</font>
+</div>
 
 
 
@@ -159,10 +177,37 @@ The three graphs give an overview of the distributions and types of our curated 
 If you find our repo useful for your research, please consider citing our paper:
 
 ```bibtex
-@article{zhang2024evaluationagent,
+@InProceedings{zhang2024evaluationagent,
     title = {Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models},
     author = {Zhang, Fan and Tian, Shulin and Huang, Ziqi and Qiao, Yu and Liu, Ziwei},
-    journal={arXiv preprint arXiv:2412.09645},
+    booktitle={Annual Meeting of the Association for Computational Linguistics (ACL), 2025},
     year = {2024}
+}
+```
+
+## Related Links
+
+Our related projects: [VBench](https://github.com/Vchitect/VBench), [Awesome Evaluation of Visual Generation](https://github.com/ziqihuangg/Awesome-Evaluation-of-Visual-Generation)
+
+```bibtex
+@InProceedings{huang2023vbench,
+    title={{VBench}: Comprehensive Benchmark Suite for Video Generative Models},
+    author={Huang, Ziqi and He, Yinan and Yu, Jiashuo and Zhang, Fan and Si, Chenyang and Jiang, Yuming and Zhang, Yuanhan and Wu, Tianxing and Jin, Qingyang and Chanpaisit, Nattapol and Wang, Yaohui and Chen, Xinyuan and Wang, Limin and Lin, Dahua and Qiao, Yu and Liu, Ziwei},
+    booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+    year={2024}
+}
+
+@article{huang2024vbench++,
+    title={{VBench++}: Comprehensive and Versatile Benchmark Suite for Video Generative Models},
+    author={Huang, Ziqi and Zhang, Fan and Xu, Xiaojie and He, Yinan and Yu, Jiashuo and Dong, Ziyue and Ma, Qianli and Chanpaisit, Nattapol and Si, Chenyang and Jiang, Yuming and Wang, Yaohui and Chen, Xinyuan and Chen, Ying-Cong and Wang, Limin and Lin, Dahua and Qiao, Yu and Liu, Ziwei},
+    journal={arXiv preprint arXiv:2411.13503},
+    year={2024}
+}
+
+@article{zheng2025vbench2,
+    title={{VBench-2.0}: Advancing Video Generation Benchmark Suite for Intrinsic Faithfulness},
+    author={Zheng, Dian and Huang, Ziqi and Liu, Hongbo and Zou, Kai and He, Yinan and Zhang, Fan and Zhang, Yuanhan and He, Jingwen and Zheng, Wei-Shi and Qiao, Yu and Liu, Ziwei},
+    journal={arXiv preprint arXiv:2503.21755},
+    year={2025}
 }
 ```
