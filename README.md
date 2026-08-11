@@ -192,6 +192,16 @@ If you find our repo useful for your research, please consider citing our paper:
     booktitle={Annual Meeting of the Association for Computational Linguistics (ACL), 2025},
     year = {2024}
 }
+
+@misc{tian2026openevaluationagentefficient,
+      title={Open Evaluation Agent: Efficient and Promptable Evaluation of Visual Generative Models},
+      author={Shulin Tian and Ziqi Huang and Fan Zhang and Hongyuan Zhu and Yu Qiao and Ziwei Liu},
+      year={2026},
+      eprint={2608.09666},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2608.09666},
+}
 ```
 
 ## Related Links
